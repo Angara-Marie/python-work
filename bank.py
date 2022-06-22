@@ -62,37 +62,38 @@ class Account:
              date= datetime.now().strftime("%x %X")
              print(f"{date}:   {Narration}   {amount}")  
              
-    def borrow(self,amount):    
+    def borrow(self,money):    
         number_of_deposits = len(self.deposits)
         loan_limit = sum(self.deposits)*1/3
-        amount+=(amount)*0.03
+        money+=(money)*0.03
        
-        if amount<=100:
+        if money<=100:
             return f"Your loan must be more than 100 "
         elif self.loan>0:
             return f"Dear customer you have an outstanding loan of {self.loan}"
         elif number_of_deposits<10:
             return f"Dear customer, you must have atleast 10 deposits"
 
-        elif amount>=loan_limit:
-            return f"Dear customer you can't borrow {amount}is higher than a limit of {self.balance}"
+        elif money>=loan_limit:
+            return f"Dear customer you can't borrow {money}is higher than a limit of {self.balance}"
 
         else:
-            self.loan+=amount
-            return f"Dear customer {self.account_name} your loan of ksh{amount} has been granted successfully"  
+            self.loan+=money
+            return f"Dear customer {self.account_name} your loan of ksh{money} has been granted successfully"  
 
 
     def loan_repay(self,amount):
         if amount<self.loan:
-            payment = self.loan-amount
-            return f"Dear customer you have paid {amount} and your loan balance is {payment}"
-        else:
+            balance = self.loan-amount
+            self.loan -= amount
+            return f"Dear customer you have paid {amount} and your loan balance is {balance}"
+        elif amount > self.loan:
             over_pay = amount-self.loan
             self.balance+=over_pay
             return f"Loan successfuly paid,the over pay is {over_pay} and your new balance is {self.balance}" 
 
 
-    def transfer(self,amount,account):
+    def transfer(self,amount,account_name):
         fee= amount*0.05
         total_amount=fee+amount
         if amount<=0:
@@ -101,7 +102,7 @@ class Account:
             return f"Dear customer {self.account_name} you balance is {self.balance} and you need atleast {total_amount}"
         else:
             self.balance-=total_amount
-            return f"Dear customer you  have sent {amount} to {account} and your new balance is {self.balance}"               
+            return f"Dear customer you  have sent {amount} to {account_name} and your new balance is {self.balance}"               
 
 
    
