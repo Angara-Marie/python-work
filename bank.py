@@ -23,7 +23,7 @@ class Account:
             self.deposits.append(amount)
             self.statement.append(transaction)
             print(self.deposits)
-            return f"Hello {self.account_name} you made a deposit of {amount} your balance is {self.balance} and your deposits are {self.deposits}."
+            return f"Hello {self.account_name} you made a deposit of {amount} at {now} your balance is {self.balance}"
 
 
     def withdraw(self, withdrawal):
@@ -41,7 +41,7 @@ class Account:
             }
             self.withdrawals.append(withdrawal)
             self.statement.append(transaction)
-            return f"Hello {self.account_name}, you made a withdrawal of {withdrawal} your new balance is {self.balance} and the withdrawals are{self.withdrawals}."  
+            return f"Hello {self.account_name}, you made a withdrawal of {withdrawal} at {now} your new balance is {self.balance}."  
 
     def deposit_statements(self):
          for a in self.deposits:
