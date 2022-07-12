@@ -18,7 +18,7 @@ class Account:
             transaction={
                 "amount":amount,
                 "time":now,
-                "Narration":"Deposit made"
+                "Narration":"Deposit"
            }
             self.deposits.append(amount)
             self.statement.append(transaction)
@@ -37,7 +37,7 @@ class Account:
             transaction = {
                 "amount":withdrawal,
                 "time":now,
-                "Narration":"You have withdrawn"
+                "Narration":"Withdrawal"
             }
             self.withdrawals.append(withdrawal)
             self.statement.append(transaction)
@@ -57,10 +57,11 @@ class Account:
 
     def full_statement(self):
         for transaction in self.statement:
-             amount = transaction["amount"]
-             Narration= transaction["Narration"]
-             date= datetime.now().strftime("%x %X")
-             print(f"{date}:   {Narration}   {amount}")  
+            self.statement.sort(key=lambda transaction:transaction["date"],reverse=True)
+            amount = transaction["amount"]
+            Narration= transaction["Narration"]
+            date= datetime.now().strftime("%x %X")
+            print(f"{date}:   {Narration}   {amount}")  
              
     def borrow(self,money):    
         number_of_deposits = len(self.deposits)
